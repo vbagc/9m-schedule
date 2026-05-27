@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Vande Bharat Express 9-Monthly Maintenance Schedule Tracker - VB 20176 Rake 42 - AGC Depot">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <title>9M Schedule — VB Rake 42</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚄</text></svg>">
+</head>
+
+<body>
+  <!-- ============================================================
+       TOAST CONTAINER
+       ============================================================ -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ============================================================
+       LOGIN PAGE (shown first, hides after login)
+       ============================================================ -->
+  <div id="login-page" class="login-page active">
+    <!-- Animated background orbs -->
+    <div class="login-bg">
+      <div class="login-bg-orb"></div>
+      <div class="login-bg-orb"></div>
+      <div class="login-bg-orb"></div>
+    </div>
+
+    <!-- Train silhouette -->
+    <div class="login-train">
+      <svg class="login-train-svg" viewBox="0 0 1200 80" fill="none">
+        <path d="M0 60 Q20 20 60 30 L80 30 Q100 20 120 30 L200 30 L200 50 Q210 60 220 50 L230 50 Q240 60 250 50 L260 50 L260 30 L400 30 Q420 20 440 30 L520 30 L520 50 Q530 60 540 50 L550 50 Q560 60 570 50 L580 50 L580 30 L700 30 Q720 15 740 30 L900 30 L900 50 Q910 60 920 50 L930 50 Q940 60 950 50 L960 50 L960 30 L1100 30 Q1120 20 1140 30 L1200 30 L1200 80 L0 80 Z" 
+              fill="currentColor"/>
+        <!-- Windows -->
+        <rect x="90" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="115" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="140" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="165" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="270" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="295" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="320" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="345" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+        <rect x="370" y="35" width="15" height="10" rx="2" fill="currentColor" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- Login form card -->
+    <div class="login-container">
+      <div class="login-card">
+        <!-- Logo -->
+        <div class="login-logo">
+          <div class="login-logo-icon">🚄</div>
+          <h1 class="login-title">9M Schedule</h1>
+          <p class="login-subtitle">Vande Bharat Express • AGC Depot</p>
+        </div>
+
+        <!-- Form -->
+        <form id="login-form" class="login-form" autocomplete="off">
+          <div class="form-group">
+            <label class="form-label" for="login-name">Your Name</label>
+            <input 
+              type="text" 
+              id="login-name" 
+              class="form-input" 
+              placeholder="Enter your name"
+              required
+              autofocus
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-designation">Designation</label>
+            <select id="login-designation" class="form-select" required>
+              <option value="" disabled selected>Select your designation</option>
+              <option value="SSE/C&W/AGC">SSE/C&W/AGC</option>
+              <option value="Sr.Tech">Sr.Tech</option>
+              <option value="Tech-I">Tech-I</option>
+              <option value="Tech-II">Tech-II</option>
+              <option value="Asst.">Asst.</option>
+            </select>
+          </div>
+
+          <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-lg login-btn ripple">
+            Enter Schedule App →
+          </button>
+        </form>
+
+        <div class="login-footer">
+          <span class="login-footer-highlight">VB 20176</span> • Rake 42 • 9-Monthly Schedule<br>
+          Maintenance Tracking & Reporting System
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN APP (shown after login)
+       ============================================================ -->
+  <div id="app" class="hidden">
+
+    <!-- ---- DASHBOARD PAGE ---- -->
+    <div id="page-dashboard" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- ELECTRICAL SCHEDULE PAGE ---- -->
+    <div id="page-electrical" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- MECHANICAL SCHEDULE PAGE ---- -->
+    <div id="page-mechanical" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- ACTIVITY DETAIL PAGE ---- -->
+    <div id="page-activity" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- SEARCH PAGE ---- -->
+    <div id="page-search" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- REFERENCE PAGE ---- -->
+    <div id="page-reference" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- PLANNING PAGE ---- -->
+    <div id="page-planning" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- REPORTS PAGE ---- -->
+    <div id="page-reports" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ---- SETTINGS PAGE ---- -->
+    <div id="page-settings" class="page container">
+      <!-- Content will be rendered by JS -->
+    </div>
+
+    <!-- ============================================================
+         BOTTOM NAVIGATION BAR
+         ============================================================ -->
+    <nav id="bottom-nav" class="bottom-nav">
+      <button class="nav-item active" data-page="dashboard" id="nav-dashboard">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" data-page="electrical" id="nav-electrical">
+        <span class="nav-icon">⚡</span>
+        <span class="nav-label">Electrical</span>
+      </button>
+      <button class="nav-item" data-page="mechanical" id="nav-mechanical">
+        <span class="nav-icon">🔧</span>
+        <span class="nav-label">Mechanical</span>
+      </button>
+      <button class="nav-item" data-page="search" id="nav-search">
+        <span class="nav-icon">🔍</span>
+        <span class="nav-label">Search</span>
+      </button>
+      <button class="nav-item" data-page="reference" id="nav-reference">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">Reference</span>
+      </button>
+      <button class="nav-item" data-page="planning" id="nav-planning">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label">Planning</span>
+      </button>
+      <button class="nav-item" data-page="more" id="nav-more">
+        <span class="nav-icon">⋮</span>
+        <span class="nav-label">More</span>
+      </button>
+    </nav>
+
+    <!-- ---- MORE MENU (overlay for Reports/Settings) ---- -->
+    <div id="more-menu" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-handle"></div>
+        <div class="modal-title">More Options</div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <button class="btn btn-outline btn-block" data-page="reports" onclick="App.navigateTo('reports'); App.closeMoreMenu();">
+            📊 Reports & Export
+          </button>
+          <button class="btn btn-outline btn-block" data-page="settings" onclick="App.navigateTo('settings'); App.closeMoreMenu();">
+            ⚙️ Settings
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- RECORD VALUE MODAL ---- -->
+    <div id="record-value-modal" class="modal-overlay">
+      <div class="modal" style="max-width: 500px;">
+        <div class="modal-handle"></div>
+        <div class="modal-title" id="rv-modal-title">Record Values</div>
+        <div id="rv-modal-content">
+          <!-- Content will be rendered dynamically -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/pages/login.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+  <script src="js/pages/planning.js"></script>
+  <script src="js/pages/search.js"></script>
+  <script src="js/pages/reference.js"></script>
+  <script src="js/pages/reports.js"></script>
+  <script src="js/pages/settings.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

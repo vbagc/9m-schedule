@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "coach_type": "DTC",
+    "commercial_no": "C1",
+    "six_digit_no": "233002",
+    "basic_unit": "BU1",
+    "position": 1
+  },
+  {
+    "id": 2,
+    "coach_type": "MC1",
+    "commercial_no": "C2",
+    "six_digit_no": "233006",
+    "basic_unit": "BU1",
+    "position": 2
+  },
+  {
+    "id": 3,
+    "coach_type": "TC",
+    "commercial_no": "C3",
+    "six_digit_no": "233014",
+    "basic_unit": "BU1",
+    "position": 3
+  },
+  {
+    "id": 4,
+    "coach_type": "MC2",
+    "commercial_no": "C4",
+    "six_digit_no": "233010",
+    "basic_unit": "BU1",
+    "position": 4
+  },
+  {
+    "id": 5,
+    "coach_type": "MC1",
+    "commercial_no": "C5",
+    "six_digit_no": "233007",
+    "basic_unit": "BU2",
+    "position": 5
+  },
+  {
+    "id": 6,
+    "coach_type": "TC",
+    "commercial_no": "C6",
+    "six_digit_no": "233016",
+    "basic_unit": "BU2",
+    "position": 6
+  },
+  {
+    "id": 7,
+    "coach_type": "MC2",
+    "commercial_no": "C7",
+    "six_digit_no": "233011",
+    "basic_unit": "BU2",
+    "position": 7
+  },
+  {
+    "id": 8,
+    "coach_type": "NDTC",
+    "commercial_no": "E1",
+    "six_digit_no": "233004",
+    "basic_unit": "BU2",
+    "position": 8
+  },
+  {
+    "id": 9,
+    "coach_type": "NDTC",
+    "commercial_no": "E2",
+    "six_digit_no": "233005",
+    "basic_unit": "BU5",
+    "position": 9
+  },
+  {
+    "id": 10,
+    "coach_type": "MC1",
+    "commercial_no": "C8",
+    "six_digit_no": "233012",
+    "basic_unit": "BU5",
+    "position": 10
+  },
+  {
+    "id": 11,
+    "coach_type": "TC",
+    "commercial_no": "C9",
+    "six_digit_no": "233015",
+    "basic_unit": "BU5",
+    "position": 11
+  },
+  {
+    "id": 12,
+    "coach_type": "MC2",
+    "commercial_no": "C10",
+    "six_digit_no": "233008",
+    "basic_unit": "BU5",
+    "position": 12
+  },
+  {
+    "id": 13,
+    "coach_type": "MC1",
+    "commercial_no": "C11",
+    "six_digit_no": "233013",
+    "basic_unit": "BU6",
+    "position": 13
+  },
+  {
+    "id": 14,
+    "coach_type": "TC",
+    "commercial_no": "C12",
+    "six_digit_no": "233017",
+    "basic_unit": "BU6",
+    "position": 14
+  },
+  {
+    "id": 15,
+    "coach_type": "MC2",
+    "commercial_no": "C13",
+    "six_digit_no": "233009",
+    "basic_unit": "BU6",
+    "position": 15
+  },
+  {
+    "id": 16,
+    "coach_type": "DTC",
+    "commercial_no": "C14",
+    "six_digit_no": "233003",
+    "basic_unit": "BU6",
+    "position": 16
+  }
+]

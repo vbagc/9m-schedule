@@ -1,0 +1,140 @@
+[
+  {
+    "id": 1,
+    "name": "Upendra Choudhary",
+    "designation": "SSE/C&W/AGC",
+    "is_sse": true
+  },
+  {
+    "id": 2,
+    "name": "Naresh Solanki",
+    "designation": "SSE/C&W/AGC",
+    "is_sse": true
+  },
+  {
+    "id": 3,
+    "name": "Sunil Singh",
+    "designation": "SSE/C&W/AGC",
+    "is_sse": true
+  },
+  {
+    "id": 4,
+    "name": "Mukesh Meena",
+    "designation": "Sr.Tech",
+    "is_sse": false
+  },
+  {
+    "id": 5,
+    "name": "Parag Kumar",
+    "designation": "Sr.Tech",
+    "is_sse": false
+  },
+  {
+    "id": 6,
+    "name": "Ramesh Kumar",
+    "designation": "Sr.Tech",
+    "is_sse": false
+  },
+  {
+    "id": 7,
+    "name": "Banna Ram Verma",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 8,
+    "name": "Bhanwar Pal Meena",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 9,
+    "name": "Anil Kumar",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 10,
+    "name": "Satyendra Singh",
+    "designation": "Sr.Tech",
+    "is_sse": false
+  },
+  {
+    "id": 11,
+    "name": "Jitendra Kumar",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 12,
+    "name": "Ompal Singh",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 13,
+    "name": "Vinesh Kumar Meena",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 14,
+    "name": "Sudhir Kumar",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 15,
+    "name": "Rakesh Kumar",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 16,
+    "name": "Uttam Singh",
+    "designation": "Tech-II",
+    "is_sse": false
+  },
+  {
+    "id": 17,
+    "name": "Shakir Khan",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 18,
+    "name": "Brijveer Singh",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 19,
+    "name": "Deepak Sharma",
+    "designation": "Tech-I",
+    "is_sse": false
+  },
+  {
+    "id": 20,
+    "name": "Rajesh Kumar Koli",
+    "designation": "Asst.",
+    "is_sse": false
+  },
+  {
+    "id": 21,
+    "name": "Vinod Meena",
+    "designation": "Asst.",
+    "is_sse": false
+  },
+  {
+    "id": 22,
+    "name": "Man Singh Meena",
+    "designation": "Sr.Tech",
+    "is_sse": false
+  },
+  {
+    "id": 23,
+    "name": "Shahid",
+    "designation": "Asst.",
+    "is_sse": false
+  }
+]
