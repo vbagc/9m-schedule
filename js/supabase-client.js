@@ -232,3 +232,5 @@ const SupabaseService = {
     return true;
   }
 };
+
+window.SupabaseService = SupabaseService;
