@@ -8,11 +8,32 @@ const SupabaseService = {
   /**
    * Initialize Supabase client using stored keys
    */
-  init() {
+  async init() {
     const url = Utils.getLocal('9m_supabase_url', '');
     const key = Utils.getLocal('9m_supabase_anon_key', '');
 
-    if (url && key && window.supabase) {
+    if (!url || !key) {
+      this.client = null;
+      return;
+    }
+
+    if (!window.supabase) {
+      console.log('⚡ Supabase SDK not found on window. Loading dynamically...');
+      try {
+        await this._loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+      } catch (err) {
+        console.warn('⚠️ Failed to load Supabase from jsDelivr, trying unpkg...');
+        try {
+          await this._loadScript('https://unpkg.com/@supabase/supabase-js@2');
+        } catch (err2) {
+          console.error('❌ Failed to load Supabase SDK from all CDNs:', err2);
+          this.client = null;
+          return;
+        }
+      }
+    }
+
+    if (window.supabase) {
       try {
         this.client = window.supabase.createClient(url, key);
         console.log('⚡ Supabase Client initialized successfully');
@@ -23,6 +44,19 @@ const SupabaseService = {
     } else {
       this.client = null;
     }
+  },
+
+  _loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => {
+        console.log(`⚡ Loaded script: ${src}`);
+        resolve();
+      };
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    });
   },
 
   /**

@@ -218,7 +218,7 @@ const SettingsPage = {
     reader.readAsText(file);
   },
 
-  _saveSupabaseConnection() {
+  async _saveSupabaseConnection() {
     const url = document.getElementById('settings-supabase-url').value.trim();
     const key = document.getElementById('settings-supabase-key').value.trim();
     
@@ -226,7 +226,7 @@ const SettingsPage = {
     Utils.setLocal('9m_supabase_anon_key', key);
     
     // Re-initialize SupabaseClient
-    SupabaseService.init();
+    await SupabaseService.init();
     
     Utils.toast('Supabase settings saved successfully!', 'success');
     Store.log('save_supabase', 'Supabase backend connection updated');
