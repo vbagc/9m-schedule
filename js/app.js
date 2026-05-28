@@ -1324,8 +1324,7 @@ const App = {
         Store.saveCompletion(activityId, coach, completionData);
       } else {
         if (existing) {
-          delete Store.get('completions')[`${activityId}_${coach}`];
-          Utils.setLocal('9m_completions', Store.get('completions'));
+          Store.deleteCompletion(activityId, coach);
         }
       }
     });

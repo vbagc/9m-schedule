@@ -213,6 +213,46 @@ const Store = {
   },
 
   /**
+   * Delete a completion record (uncheck coach)
+   */
+  deleteCompletion(activityId, coachId) {
+    const key = `${activityId}_${coachId}`;
+    if (this._state.completions[key]) {
+      delete this._state.completions[key];
+      Utils.setLocal('9m_completions', this._state.completions);
+    }
+    
+    // Log the action
+    const logEntry = this.log('delete_completion', `Activity ${activityId}, Coach ${coachId}: Removed completion`);
+
+    // Sync online or queue offline
+    if (this._state.isOnline && window.SupabaseService && SupabaseService.isConfigured()) {
+      SupabaseService.deleteCompletion(activityId, coachId)
+        .then(() => SupabaseService.insertLog(logEntry))
+        .catch(err => {
+          console.warn('Failed to delete completion from Supabase, queuing:', err);
+          this._queuePendingSync({
+            type: 'delete_completion',
+            key,
+            activityId,
+            coachId,
+            timestamp: Utils.now()
+          });
+        });
+    } else {
+      this._queuePendingSync({
+        type: 'delete_completion',
+        key,
+        activityId,
+        coachId,
+        timestamp: Utils.now()
+      });
+    }
+
+    Utils.emit('completion:deleted', { activityId, coachId });
+  },
+
+  /**
    * Calculate completion stats for an equipment
    */
   getEquipmentStats(equipment) {
@@ -303,6 +343,8 @@ const Store = {
       try {
         if (item.type === 'completion') {
           await SupabaseService.upsertCompletion(item.activityId, item.coachId, item.data);
+        } else if (item.type === 'delete_completion') {
+          await SupabaseService.deleteCompletion(item.activityId, item.coachId);
         } else if (item.type === 'custom_spec') {
           await SupabaseService.upsertCustomSpec(item.activityId, item.data);
         } else if (item.type === 'delete_custom_spec') {
@@ -329,7 +371,8 @@ const Store = {
    */
   _queuePendingSync(item) {
     this._state.pendingSync = this._state.pendingSync.filter(x => {
-      if (item.type === 'completion' && x.type === 'completion') {
+      if ((item.type === 'completion' || item.type === 'delete_completion') && 
+          (x.type === 'completion' || x.type === 'delete_completion')) {
         return x.key !== item.key;
       }
       if (item.type === 'custom_spec' && x.type === 'custom_spec') {
@@ -368,6 +411,23 @@ const Store = {
       const localCompletions = this._state.completions || {};
 
       if (completionsList) {
+        // Create a set of keys in the database
+        const dbKeys = new Set(completionsList.map(r => `${r.activity_id}_${r.coach_id}`));
+
+        // 1. Remove local completions that are not in the database and not pending sync
+        Object.keys(localCompletions).forEach(key => {
+          if (!dbKeys.has(key)) {
+            // Check if this key is pending sync (meaning it was created offline and not synced yet)
+            const isPending = this._state.pendingSync.some(p => p.key === key && p.type === 'completion');
+            if (!isPending) {
+              console.log(`🗑️ Sync: Removing local completion ${key} (deleted on server)`);
+              delete localCompletions[key];
+              completionsChanged = true;
+            }
+          }
+        });
+
+        // 2. Merge database records
         completionsList.forEach(dbRecord => {
           const key = `${dbRecord.activity_id}_${dbRecord.coach_id}`;
           const localRecord = localCompletions[key];

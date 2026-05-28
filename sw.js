@@ -1,4 +1,4 @@
-const CACHE_NAME = '9m-schedule-v5';
+const CACHE_NAME = '9m-schedule-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
