@@ -50,6 +50,23 @@ const SettingsPage = {
       <div class="card anim-fade-in-up" style="margin-bottom: var(--space-4);">
         <h3 style="font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; margin-bottom: var(--space-3); color: var(--primary-400);">Supabase Backend Settings</h3>
         <p style="font-size: var(--text-xs); color: var(--text-tertiary); margin: 0 0 var(--space-3) 0;">Configure dynamic connection to sync completed schedules to Supabase cloud database.</p>
+        
+        <!-- Live Sync Status Indicators -->
+        <div style="font-size: var(--text-xs); background: var(--bg-tertiary); border: 1px solid var(--glass-border); padding: var(--space-3); border-radius: var(--radius-md); margin-bottom: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--text-secondary); font-weight: 500;">Connection Status:</span>
+            <span style="font-weight: 700; color: ${Store.get('isOnline') && window.SupabaseService?.isConfigured() ? 'var(--success-400)' : 'var(--danger-400)'}">
+              ${Store.get('isOnline') && window.SupabaseService?.isConfigured() ? '🟢 Online & Configured' : !Store.get('isOnline') ? '⚠️ Offline' : '❌ Not Configured'}
+            </span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: var(--text-secondary); font-weight: 500;">Unsynced Queue:</span>
+            <span style="font-weight: 700; color: ${Store.get('pendingSync').length > 0 ? 'var(--warning-400)' : 'var(--success-400)'}">
+              ${Store.get('pendingSync').length} items pending
+            </span>
+          </div>
+        </div>
+
         <div style="display: flex; flex-direction: column; gap: var(--space-3);">
           <div class="form-group">
             <label class="form-label" for="settings-supabase-url">Supabase Project URL</label>
@@ -108,7 +125,7 @@ const SettingsPage = {
             <div style="font-size: 0.65rem; line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: var(--space-1);">
               <div style="display: flex; justify-content: space-between; color: var(--text-tertiary);">
                 <span><strong>[${log.action.toUpperCase()}]</strong> by ${Utils.escapeHtml(log.user)}</span>
-                <span>${Utils.escapeHtml(log.timestamp.slice(11, 19))}</span>
+                <span>${Utils.escapeHtml(Utils.formatDate(log.timestamp))} ${Utils.escapeHtml(Utils.formatTime(log.timestamp, true))}</span>
               </div>
               <div style="color: var(--text-secondary); margin-top: 2px;">
                 ${Utils.escapeHtml(log.details)}

@@ -13,9 +13,13 @@ const DashboardPage = {
     const mechStats = this._calcScheduleStats(mechanical);
     const overallTotal = elecStats.total + mechStats.total;
     const overallCompleted = elecStats.completed + mechStats.completed;
-    const overallPct = Utils.percentage(overallCompleted, overallTotal);
-    const elecPct = Utils.percentage(elecStats.completed, elecStats.total);
-    const mechPct = Utils.percentage(mechStats.completed, mechStats.total);
+    
+    // Calculate percentages based on coach-activities
+    const overallTotalCoach = elecStats.totalCoachActivities + mechStats.totalCoachActivities;
+    const overallCompletedCoach = elecStats.completedCoachActivities + mechStats.completedCoachActivities;
+    const overallPct = Utils.percentage(overallCompletedCoach, overallTotalCoach);
+    const elecPct = elecStats.percentage;
+    const mechPct = mechStats.percentage;
 
     page.innerHTML = `
       <!-- Header -->
@@ -115,18 +119,32 @@ const DashboardPage = {
    */
   _calcScheduleStats(scheduleData) {
     if (!scheduleData || !scheduleData.equipment) {
-      return { total: 0, completed: 0, partial: 0, percentage: 0 };
+      return { total: 0, completed: 0, partial: 0, percentage: 0, totalCoachActivities: 0, completedCoachActivities: 0 };
     }
 
     let total = 0, completed = 0, partial = 0;
+    let totalCoachActivities = 0, completedCoachActivities = 0;
 
     scheduleData.equipment.forEach(equip => {
       const stats = Store.getEquipmentStats(equip);
       total += stats.total;
       completed += stats.completed;
       partial += stats.partial;
+      totalCoachActivities += (stats.totalCoachActivities || stats.total);
+      completedCoachActivities += (stats.completedCoachActivities || stats.completed);
     });
 
-    return { total, completed, partial, percentage: Utils.percentage(completed, total) };
+    const percentage = totalCoachActivities > 0 
+      ? Utils.percentage(completedCoachActivities, totalCoachActivities) 
+      : 0;
+
+    return { 
+      total, 
+      completed, 
+      partial, 
+      percentage,
+      totalCoachActivities,
+      completedCoachActivities
+    };
   }
 };

@@ -20,11 +20,20 @@ const Utils = {
   },
 
   /**
-   * Format date to Indian format (DD/MM/YYYY)
+   * Format date to Indian format (DD/MM/YYYY) or YYYY-MM-DD
    */
-  formatDate(dateStr) {
+  formatDate(dateStr, format) {
     if (!dateStr) return '—';
     const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '—';
+    
+    if (format === 'YYYY-MM-DD') {
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+    
     return d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
   },
 
@@ -38,12 +47,15 @@ const Utils = {
   },
 
   /**
-   * Format time (HH:MM)
+   * Format time (HH:MM:SS) in local timezone
    */
-  formatTime(dateStr) {
+  formatTime(dateStr, includeSeconds = false) {
     if (!dateStr) return '';
     const d = new Date(dateStr);
-    return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    if (isNaN(d.getTime())) return '';
+    const options = { hour: '2-digit', minute: '2-digit' };
+    if (includeSeconds) options.second = '2-digit';
+    return d.toLocaleTimeString('en-IN', options);
   },
 
   /**

@@ -222,6 +222,9 @@ const Store = {
     let completedActivities = 0;
     let partialActivities = 0;
 
+    let totalCoachActivities = 0;
+    let completedCoachActivities = 0;
+
     const coaches = equipment.applicable_coaches || [];
 
     equipment.sub_sections.forEach(section => {
@@ -235,14 +238,30 @@ const Store = {
         } else if (completedCoaches > 0) {
           partialActivities++;
         }
+
+        if (coaches.length > 0) {
+          totalCoachActivities += coaches.length;
+          completedCoachActivities += Math.min(completedCoaches, coaches.length);
+        } else {
+          totalCoachActivities += 1;
+          if (completedCoaches > 0) {
+            completedCoachActivities += 1;
+          }
+        }
       });
     });
+
+    const percentage = totalCoachActivities > 0 
+      ? Utils.percentage(completedCoachActivities, totalCoachActivities) 
+      : 0;
 
     return {
       total: totalActivities,
       completed: completedActivities,
       partial: partialActivities,
-      percentage: Utils.percentage(completedActivities, totalActivities)
+      percentage: percentage,
+      totalCoachActivities: totalCoachActivities,
+      completedCoachActivities: completedCoachActivities
     };
   },
 
